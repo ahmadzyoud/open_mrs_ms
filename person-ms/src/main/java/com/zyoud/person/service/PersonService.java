@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zyoud.person.model.Person;
 import com.zyoud.person.model.PersonName;
-import com.zyoud.person.random.RandomVector;
 import com.zyoud.person.repository.PersonNameRepository;
 import com.zyoud.person.repository.PersonRepository;
 import com.zyoud.person.service.dto.PersonDTO;
@@ -26,8 +25,6 @@ public class PersonService {
 
 	private PersonMapper personMapper;
 
-	private RandomVector randomVector;
-
 	public PersonService(PersonRepository personRepository, PersonNameRepository personNameRepository) {
 		super();
 		this.personRepository = personRepository;
@@ -35,25 +32,7 @@ public class PersonService {
 	}
 
 	public Person createPerson(@Valid PersonDTO personDTO) {
-		double[] nextVector = randomVector.getNextVector();
-		for (double each : nextVector) {
-			System.out.println(each);
-		}
-		System.out.println("++++++++++++++++++++++++");
-		nextVector = randomVector.getNextVector();
-		for (double each : nextVector) {
-			System.out.println(each);
-		}
-		System.out.println("++++++++++++++++++++++++");
-		nextVector = randomVector.getNextVector();
-		for (double each : nextVector) {
-			System.out.println(each);
-		}
-		System.out.println("++++++++++++++++++++++++");
-		nextVector = randomVector.getNextVector();
-		for (double each : nextVector) {
-			System.out.println(each);
-		}
+
 		Person person = personMapper.personDTOtoPerson(personDTO);
 		personRepository.save(person);
 
@@ -74,15 +53,6 @@ public class PersonService {
 	public void setPersonMapper(PersonMapper personMapper) {
 
 		this.personMapper = personMapper;
-	}
-
-	public RandomVector getRandomVector() {
-		return randomVector;
-	}
-
-	@Autowired
-	public void setRandomVector(RandomVector randomVector) {
-		this.randomVector = randomVector;
 	}
 
 }
